@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-from datetime import date
+from datetime import datetime
 from enum import Enum
 
 
@@ -14,12 +14,12 @@ class Task(BaseModel):
     id: Optional[int] = None
     title: str
     description: Optional[str] = None
-    due_date: Optional[date] = None
+    due_date: Optional[datetime] = None
     status: Status = Status.pending
 
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
-    due_date: Optional[date] = None
+    due_date: Optional[datetime] = None
     status: Optional[Status] = None
