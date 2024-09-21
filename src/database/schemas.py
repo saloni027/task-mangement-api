@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 from enum import Enum
@@ -11,11 +11,10 @@ class Status(str, Enum):
 
 
 class Task(BaseModel):
-    id: Optional[int] = None
     title: str
     description: Optional[str] = None
     due_date: Optional[datetime] = None
-    status: str
+    status: Status = Status.pending
 
 
 class TaskUpdate(BaseModel):
@@ -26,5 +25,5 @@ class TaskUpdate(BaseModel):
 
 class TaskResponse(Task):
     id: int
-
+    
 
