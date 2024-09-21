@@ -1,4 +1,3 @@
-from src.database.schemas import Task
 from src.database.models import Tasks
 from src.database.config import db_dependency
 from src.routes.task_router import task_router

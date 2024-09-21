@@ -22,4 +22,9 @@ class TaskUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     due_date: Optional[datetime] = None
-    status: str
+    status: Optional[str] = None
+
+class TaskResponse(Task):
+    id: int
+
+
