@@ -18,7 +18,7 @@ services:
       DB_URI: "postgresql://postgres:password@db:5432/postgres"
     depends_on:
       - db
-    command: uvicorn main:app --host 0.0.0.0 
+    command: uvicorn main:app --host 0.0.0.0 --reload
     ports:
       - 8000:8000
  
