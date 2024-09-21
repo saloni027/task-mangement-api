@@ -1,8 +1,11 @@
 from fastapi import FastAPI
-
-from src.routes.get_tasks import task_get_router
+from src.database.config import init_db
+from src.routes.task_router import task_router
+from src.routes import create_task, get_task, get_tasks, delete_task, update_task
 
 app = FastAPI()
 
+init_db()
+app.include_router(task_router)
 
-app.include_router(task_get_router)
+

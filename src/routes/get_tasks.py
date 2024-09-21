@@ -1,24 +1,30 @@
-from src.database.schemas import Task
-from fastapi import APIRouter
+from src.database.schemas import Task, Status
+from src.database.models import Tasks
+from src.database.config import db_dependency
+from src.routes.task_router import task_router
+from fastapi import status
 
-task_get_router = APIRouter(prefix="/tasks")
-
-all_tasks = [
-    {"id": 1, "title": "task1", "description": "New task", "status": "pending"},
-    {"id": 2, "title": "task2", "description": "New task1", "status": "completed"},
-]
-
-
-@task_get_router.get(path="")
-def get_task_list(status: str | None = None):
+@task_router.get(path="", status_code=status.HTTP_200_OK)
+def get_task_list(db: db_dependency, status: Status = None):
+    all_tasks = db.query(Tasks).all()
     if status:
-        task_with_status = list(filter(lambda x: x["status"] == status, all_tasks))
-        return task_with_status
+        tasks = db.query(Tasks).filter(Tasks.status == status).all()
+        return {"tasks": tasks}
 
-    return {"all_tasks": all_tasks}
+    return {"all_tasks":all_tasks}
 
 
-@task_get_router.get(path="/{task_id}")
-def get_task(task_id: int):
-    task = list(filter(lambda x: x["id"] == task_id, all_tasks))
-    return {"task": task}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
