@@ -15,11 +15,11 @@ class Task(BaseModel):
     title: str
     description: Optional[str] = None
     due_date: Optional[datetime] = None
-    status: Status = Status.pending
+    status: str
 
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     due_date: Optional[datetime] = None
-    status: Optional[Status] = None
+    status: str

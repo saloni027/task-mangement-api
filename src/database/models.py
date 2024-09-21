@@ -19,7 +19,7 @@ class Tasks(Base):
     # type_annotation_map = {
     #     Status: sqlalchemy.Enum(Status, length=50, native_enum=False,default=Status.PENDING)
     # }
-    status: Enum = Column(Enum(Status), default=Status.PENDING)
+    status: str = Column(String, default="pending")
 
 
  
