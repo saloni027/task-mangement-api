@@ -1,13 +1,12 @@
-from src.database.schemas import Task, TaskResponse
-from src.database.models import Tasks
+from src.database.schemas import Task
 from src.database.config import db_dependency
+from src.database.db_operations import add_task_to_db
+from src.utils.serialize_response import serialize_response
 from src.routes.task_router import task_router
 from fastapi import status
 
-@task_router.post(path="", response_model=TaskResponse, status_code=status.HTTP_201_CREATED)
-def create_task(task: Task, db: db_dependency):
-    new_task = Tasks(title=task.title, description=task.description, due_date=task.due_date, status=task.status)
-    db.add(new_task)
-    db.commit()
-    task_response = TaskResponse(id= new_task.id, title=new_task.title, description=new_task.description, due_date=task.due_date, status=task.status)
+@task_router.post(path="", status_code=status.HTTP_201_CREATED)
+async def create_task(task: Task, db: db_dependency):
+    new_task = await add_task_to_db(task, db)
+    task_response = serialize_response(new_task)
     return task_response

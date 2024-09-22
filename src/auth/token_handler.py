@@ -1,4 +1,4 @@
-from jose import JWTError, jwt
+import jwt
 from fastapi import Depends,HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from typing import Annotated
@@ -14,7 +14,7 @@ def handle_token(token: token_depends):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return payload
 
-    except JWTError:
+    except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")
 
 verify_token = Annotated[str, Depends(handle_token)]
