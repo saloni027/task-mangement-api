@@ -14,8 +14,8 @@ services:
   api:
     build:
       context: .
-    environment:
-      DB_URI: "postgresql://postgres:password@db:5432/postgres"
+    env_file:
+      - .env
     depends_on:
       - db
     command: uvicorn main:app --host 0.0.0.0 --reload
