@@ -229,7 +229,7 @@ Response:
 
 ```
 
-POST /tasks/1
+PUT /tasks/1
 
 Request body:
 
