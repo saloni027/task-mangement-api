@@ -18,7 +18,7 @@ services:
       - .env
     depends_on:
       - db
-    command: uvicorn main:app --host 0.0.0.0 --reload
+    command: uvicorn main:app --host 0.0.0.0
     ports:
       - 8000:8000
  
