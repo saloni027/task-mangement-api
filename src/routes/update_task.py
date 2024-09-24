@@ -34,7 +34,7 @@ async def update_task(task_id: int, task: TaskUpdate, db: db_dependency):
     if not db_task:
         raise HTTPException(status_code=404, detail=f"Task with id {task_id} not found")
 
-    if task.status not in Status.__members__:
+    if task.status and task.status not in Status.__members__:
         raise HTTPException(
             status_code=400,
             detail=f"Invalid status '{task.status}', valid statuses are {list(Status)}",
