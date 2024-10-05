@@ -9,7 +9,6 @@ from decouple import config
 DB_URI = config("DB_URI")
 
 engine = create_engine(DB_URI)
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
@@ -31,7 +30,7 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
-def init_db():
+async def init_db():
     """
     Initialize the database by creating all tables.
 
